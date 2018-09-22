@@ -5,7 +5,7 @@
  * @param leftTime {number}  time(second) left for countdown
  * @param i {number} period time(second) to execute `onDown`
  */
-module.exports = function CountDown(leftTime, i) {
+function CountDown(leftTime, i) {
   var self = this;
   // timer
   self.timer = null;
@@ -84,3 +84,5 @@ CountDown.prototype.restart = function () {
   this.reset();
   this.start();
 };
+
+module.exports = CountDown;
