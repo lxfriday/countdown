@@ -62,7 +62,7 @@ countdown1.start();
 // time now left: 178 seconds(s)
 // time now left: 177 seconds(s)
 
-countdown1.pause(); // termporarily pause
+countdown1.pause(); // temporarily pause
 
 countdown1.start();
 
