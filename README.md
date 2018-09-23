@@ -15,7 +15,7 @@ yarn add @lxfriday/countdown
 ### constructor
 
 - `leftTime` `{number}` `required` time(second) left for countdown
-- `i` `{number}` period time(second) to execute `func`
+- `i` `{number}` period time(second) to execute `onDown`
 
 
 ### CountDown.prototype.onDown
@@ -57,17 +57,17 @@ countdown1.onDown = function (leftTime) {
 
 countdown1.start();
 
-// time now left: 180 seconds(s)
 // time now left: 179 seconds(s)
 // time now left: 178 seconds(s)
 // time now left: 177 seconds(s)
+// time now left: 176 seconds(s)
 
 countdown1.pause(); // temporarily pause
 
 countdown1.start();
 
-// time now left: 176 seconds(s)
 // time now left: 175 seconds(s)
+// time now left: 174 seconds(s)
 
 countdown1.stop(); // now stoped
 
@@ -76,14 +76,14 @@ countdown1.stop(); // now stoped
 countdown1.reset();
 countdown1.start();
 
-// 180
-// 179 ...
+// 179
+// 178 ...
 
 // or call restart
 
 countdown1.restart();
 
-// 180
-// 179 ...
+// 179
+// 178 ...
 
 ```
