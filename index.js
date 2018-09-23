@@ -10,7 +10,8 @@ function CountDown(leftTime, i) {
   // timer
   self.timer = null;
 
-  if (leftTime === undefined) {
+  // at least one param
+  if (!arguments.length) {
     throw new Error('at least one param for countdown steper to execute');
   }
 
@@ -18,9 +19,11 @@ function CountDown(leftTime, i) {
   self.initialLeftTime = +leftTime;
   // temp self subtract
   self.availableTime = +leftTime;
+  // cached time when paused
+  self.cachePauseTime = +leftTime;
   // period interval
   self.interval = i || 1;
-};
+}
 
 /**
  * countdown executor
@@ -28,18 +31,23 @@ function CountDown(leftTime, i) {
 CountDown.prototype.steper = function () {
   var self = this;
   if (self.availableTime > 0) {
-    self.timer = setInterval(function () {
+    function func() {
+      self.timer = setTimeout(function () {
 
-      /**
-       * hack callback
-       */
-      self.onDown(self.availableTime);
+        self.availableTime -= self.interval;
 
-      self.availableTime -= self.interval;
-      if (self.availableTime < 0) {
-        clearInterval(self.timer);
-      }
-    }, self.interval * 1000);
+        /**
+         * hack callback
+         */
+        self.onDown(self.availableTime);
+
+        if (self.availableTime > 0) {
+          func();
+        }
+      }, self.interval * 1000);
+    }
+
+    func();
   }
 };
 
@@ -52,7 +60,9 @@ CountDown.prototype.onDown = function (availableTime) { };
  * pause countdown temporarily
  */
 CountDown.prototype.pause = function () {
- clearInterval(this.timer);
+  this.cachePauseTime = this.availableTime;
+  this.availableTime = 0;
+  clearTimeout(this.timer);
 };
 
 /**
@@ -60,13 +70,16 @@ CountDown.prototype.pause = function () {
  */
 CountDown.prototype.stop = function () {
   this.availableTime = 0;
-  clearInterval(this.timer);
+  this.cachePauseTime = 0;
+  clearTimeout(this.timer);
 };
 
 /**
  * start countdown
  */
 CountDown.prototype.start = function () {
+  this.availableTime = this.cachePauseTime;
+  clearTimeout(this.timer);
   this.steper();
 };
 
@@ -75,6 +88,8 @@ CountDown.prototype.start = function () {
  */
 CountDown.prototype.reset = function () {
   this.availableTime = this.initialLeftTime;
+  this.cachePauseTime = this.initialLeftTime;
+  clearTimeout(this.timer);
 };
 
 /**
