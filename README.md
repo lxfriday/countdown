@@ -12,13 +12,12 @@ yarn add @lxfriday/countdown
 
 ## params
 
-### constructor
+### `constructor`
 
 - `leftTime` `{number}` `required` time(second) left for countdown
 - `i` `{number}` period time(second) to execute `onDown`
 
-
-### CountDown.prototype.onDown
+### `CountDown.prototype.onDown`
 called every period, hack func
 
 ```js
@@ -30,19 +29,19 @@ CountDown.prototype.onDown = function (leftTime) {
 
 ```
 
-### CountDown.prototype.start
+### `CountDown.prototype.start`
 start countdown
 
-### CountDown.prototype.pause
+### `CountDown.prototype.pause`
 pause countdown temporarily
 
-### CountDown.prototype.stop
+### `CountDown.prototype.stop`
 stop countdown
 
-### CountDown.prototype.reset
+### `CountDown.prototype.reset`
 reset the available time to initial time
 
-### CountDown.prototype.restart
+### `CountDown.prototype.restart`
 restart countdown using the initial leftTime
 
 ## usage
