@@ -1,6 +1,6 @@
 {
   "name": "@lxfriday/countdown",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "auto countdown",
   "main": "index.js",
   "scripts": {
